@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SURPRISE 💌</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+  text-transform: uppercase;
+}
+
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#ffccd5,#ffeaf4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  transition:1s;
+}
+
+/* INTRO SCREEN */
+.intro{
+  text-align:center;
+  animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+.intro h1{
+  color:#c9184a;
+  margin-bottom:15px;
+}
+
+.intro p{
+  color:#444;
+  margin-bottom:15px;
+}
+
+button{
+  padding:12px 24px;
+  border:none;
+  border-radius:10px;
+  background:#ff6f91;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+/* REVEAL SECTION */
+.reveal{
+  display:none;
+  text-align:center;
+  animation:fadeIn 2s ease;
+  max-width:420px;
+  position:relative;
+  z-index:2;
+}
+
+.reveal img{
+  width:220px;          /* controls size */
+  height:auto;
+  border-radius:20px;
+  margin:0 auto 20px auto;
+  display:block;
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
+  opacity:0;
+  transform:scale(0.9);
+  transition:1.5s ease;
+}
+
+
+.message{
+  color:#c9184a;
+  line-height:1.6;
+  font-size:15px;
+  white-space:pre-line;
+  border-right:2px solid #c9184a;
+  overflow:hidden;
+  min-height:150px;
+}
+
+/* PETALS */
+.petal{
+  position:absolute;
+  top:-20px;
+  pointer-events:none;
+  animation:fall linear forwards;
+  opacity:0.7;
+  filter:blur(2px); /* BLUR EFFECT */
+}
+
+@keyframes fall{
+  0%{
+    transform:translateY(-10vh) translateX(0px) rotate(0deg);
+  }
+  100%{
+    transform:translateY(110vh) translateX(40px) rotate(360deg);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="intro" id="intro">
+  <h1>SURPRISE BABES 💌</h1>
+  <p>I KNOW I TOLD YOU I’D NEVER DO THIS…</p>
+  <p>BUT GUESS WHAT I DID 👀</p>
+  <button onclick="startReveal()">GO AHEAD</button>
+</div>
+
+<div class="reveal" id="reveal">
+  <img src="ss.jpg" id="portrait" alt="portrait">
+  <div class="message" id="message"></div>
+
+  <br>
+  <a href="last.html">
+    <button style="margin-top:20px; background:#ff8fab;">LASTLY</button>
+  </a>
+</div>
+
+
+<script>
+const text = `as we KNOW ABOUT THE ARTIST CURSE.
+THEY SAY ARTISTS LOSE WHAT THEY CREATE and love ik i believed in it for a very long time.
+
+I DIDN’T MAKE THIS BECAUSE I’M AFRAID TO LOSE YOU.
+I MADE THIS BECAUSE YOU complete ME.
+
+AND IF THERE’S ANY CURSE,
+I’LL GLADLY DEFY IT FOR YOU.
+
+YOU’RE NOT JUST anybody.
+YOU’RE MY CHOICE. 💗`;
+
+function startReveal(){
+  document.getElementById("intro").style.display="none";
+  const reveal = document.getElementById("reveal");
+  reveal.style.display="block";
+
+  const img = document.getElementById("portrait");
+
+  setTimeout(()=>{
+    img.style.opacity="1";
+    img.style.transform="scale(1)";
+  },500);
+
+  setTimeout(typeWriter,1500);
+
+  // Start blurred petals
+  const petalInterval = setInterval(createPetal, 250);
+
+  setTimeout(()=>{
+    clearInterval(petalInterval);
+  },9000);
+}
+
+function typeWriter(){
+  const message = document.getElementById("message");
+  let i=0;
+
+  function typing(){
+    if(i<text.length){
+      message.innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(typing,40);
+    }
+  }
+  typing();
+}
+
+function createPetal(){
+  const petal = document.createElement("div");
+  petal.className = "petal";
+  petal.innerText = "🌸";
+
+  petal.style.left = Math.random() * window.innerWidth + "px";
+  petal.style.animationDuration = (6 + Math.random()*4) + "s";
+  petal.style.fontSize = (16 + Math.random()*12) + "px";
+
+  document.body.appendChild(petal);
+
+  setTimeout(()=>{
+    petal.remove();
+  },10000);
+}
+</script>
+
+</body>
+</html>
