@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hehe 💐</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd6e0, #ffeaf0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  position: relative;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* FADE IN */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* DIAGONAL PETALS */
+.petal {
+  position: absolute;
+  font-size: 22px;
+  opacity: 0.7;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translate(-10vw, -10vh) rotate(0deg);
+  }
+  100% {
+    transform: translate(110vw, 110vh) rotate(360deg);
+  }
+}
+
+/* CARD */
+.container {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(6px);
+  padding: 40px 30px;
+  border-radius: 24px;
+  text-align: center;
+  width: 340px;
+  z-index: 2;
+  animation: glow 3s infinite alternate;
+}
+
+/* GLOW EFFECT */
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(255,105,180,0.4);
+  }
+  to {
+    box-shadow: 0 0 40px rgba(255,105,180,0.8);
+  }
+}
+
+/* IMAGE */
+.container img {
+  width: 100%;
+  border-radius: 18px;
+  margin-bottom: 20px;
+}
+
+/* TYPEWRITER TEXT */
+h1 {
+  font-size: 20px;
+  color: #c9184a;
+  margin-bottom: 25px;
+  border-right: 3px solid #c9184a;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 3s steps(30, end) forwards, blink 0.7s infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: #ff6b81;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #ff4d6d;
+}
+
+/* SPARKLES */
+.sparkle {
+  position: absolute;
+  font-size: 14px;
+  pointer-events: none;
+  animation: sparkleFade 1s forwards;
+}
+
+@keyframes sparkleFade {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio autoplay loop muted id="bgMusic">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- DIAGONAL PETALS -->
+<script>
+for (let i = 0; i < 20; i++) {
+  const petal = document.createElement("div");
+  petal.className = "petal";
+  petal.innerText = "🌸";
+  petal.style.left = Math.random() * 100 + "vw";
+  petal.style.animationDuration = (6 + Math.random() * 5) + "s";
+  petal.style.fontSize = (18 + Math.random() * 10) + "px";
+  document.body.appendChild(petal);
+}
+</script>
+
+<div class="container">
+  <img src="images.jpg" alt="flowers for you">
+  <h1>HEHE IG I MADE U THIS TOO..?? 💐</h1>
+
+  <a href="mwah4.html">
+    <button>back 💗</button>
+  </a>
+</div>
+
+<!-- CURSOR SPARKLES -->
+<script>
+document.addEventListener("mousemove", function(e) {
+  const sparkle = document.createElement("div");
+  sparkle.className = "sparkle";
+  sparkle.innerText = "💗";
+  sparkle.style.left = e.pageX + "px";
+  sparkle.style.top = e.pageY + "px";
+  document.body.appendChild(sparkle);
+
+  setTimeout(() => {
+    sparkle.remove();
+  }, 1000);
+});
+
+/* Enable music after first click (browser rule) */
+window.addEventListener("click", () => {
+  const music = document.getElementById("bgMusic");
+  music.muted = false;
+  music.play();
+});
+</script>
+
+</body>
+</html>

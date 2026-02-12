@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ONLY YOU CAN OPEN THIS 💌</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+  text-transform: uppercase;
+}
+
+body{
+  height:100vh;
+  background: linear-gradient(135deg,#ffd6e0,#ffeaf4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  animation: fadeIn 1.5s ease;
+}
+
+/* Fade In */
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+/* Floating hearts */
+.heart{
+  position:absolute;
+  font-size:22px;
+  opacity:0.4;
+  animation: float 12s linear infinite;
+}
+
+@keyframes float{
+  from{ transform:translateY(100vh); }
+  to{ transform:translateY(-120vh); }
+}
+
+/* Card */
+.card{
+  background:white;
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+  width:340px;
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow{
+  from{ box-shadow:0 0 15px rgba(255,105,180,0.3);}
+  to{ box-shadow:0 0 35px rgba(255,105,180,0.6);}
+}
+
+h2{
+  color:#d63384;
+  margin-bottom:15px;
+}
+
+p{
+  margin-bottom:15px;
+  color:#444;
+}
+
+input{
+  padding:10px;
+  width:100%;
+  border-radius:8px;
+  border:1px solid #ff9ecf;
+  outline:none;
+  margin-bottom:12px;
+}
+
+button{
+  padding:10px 20px;
+  border:none;
+  border-radius:8px;
+  background:#ff6fa1;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+  margin-top:8px;
+  width:100%;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+/* Secret area */
+.secret{
+  display:none;
+  margin-top:20px;
+  color:#d63384;
+  font-size:15px;
+  line-height:1.6;
+}
+
+.typewriter{
+  border-right:2px solid #d63384;
+  white-space:pre-line;
+  overflow:hidden;
+}
+
+.close-btn{
+  background:#ff8fab;
+}
+
+/* Feedback text */
+.feedback{
+  margin-top:8px;
+  font-size:14px;
+  color:#d63384;
+  min-height:20px;
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  pointer-events:none;
+  animation:sparkleFade 1s forwards;
+}
+
+@keyframes sparkleFade{
+  from{opacity:1; transform:scale(1);}
+  to{opacity:0; transform:scale(2);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating Hearts -->
+<span class="heart" style="left:5%; animation-delay:0s;">💖</span>
+<span class="heart" style="left:25%; animation-delay:3s;">💗</span>
+<span class="heart" style="left:50%; animation-delay:5s;">💘</span>
+<span class="heart" style="left:75%; animation-delay:2s;">💓</span>
+<span class="heart" style="left:90%; animation-delay:4s;">💝</span>
+
+<div class="card">
+
+  <h2>THERE’S SOMETHING HERE… 💌</h2>
+  <p>BUT ONLY YOU CAN OPEN IT</p>
+
+  <input type="password" id="password" placeholder="ENTER THE SECRET...">
+  
+  <button onclick="unlock()">UNLOCK</button>
+
+  <!-- Back Button BELOW Unlock -->
+  <a href="index.html">
+    <button style="background:#ff8fab;">← BACK</button>
+  </a>
+
+  <div class="feedback" id="feedback"></div>
+
+  <div class="secret" id="secret">
+    <div class="typewriter" id="message"></div>
+    <button class="close-btn" onclick="closeSecret()">CLOSE BEFORE MEREKO AUR SHARAM AAYE 😭</button>
+  </div>
+
+</div>
+
+<script>
+const correctPassword = "24102025"; 
+let attempts = 0;
+
+const text = `I DIDN’T WANT TO SAY THIS DIRECTLY YET...
+
+Ik it's been almost 4 months only ik it's very less but I CAN’T HELP BUT FEEL THIS WAY cuz like 
+it feels like forever to me and I just want to say that I LOVE YOU SO MUCH like soo soo soo  muchhhhhh 💗💗💗
+
+YOU’VE SLOWLY BECOME SOMEONE REALLY IMPORTANT TO ME. like a part of me shreya that i can never forget about nd i don't even wanna forget.
+u r my forever and i just want to be with u forever and ever and ever bss. I CHOOSE YOU AND ONLY YOU AND I’M REALLY GLAD IT’S YOU.
+
+hn ik LONG DISTANCE IS HARD SOMETIMES we fight a lot srsly a lot but at the end we always end up talking and making up and i just want to say that I APPRECIATE HOW MUCH EFFORT YOU PUT IN TO MAKE THIS WORK. I KNOW IT’S NOT EASY FOR YOU EITHER, AND I’M REALLY GRATEFUL FOR EVERYTHING YOU DO my cutie my guchupuchu my cupcake.
+BUT CHOOSING YOU ISN’T.
+
+I’M REALLY GLAD IT’S YOU. 💗`;
+
+function unlock(){
+  const input = document.getElementById("password").value;
+  const feedback = document.getElementById("feedback");
+  const secret = document.getElementById("secret");
+
+  if(input === correctPassword){
+    feedback.innerHTML = "";
+    secret.style.display = "block";
+    typeWriter();
+  } else {
+    attempts++;
+
+    if(attempts < 3){
+      feedback.innerHTML = "HMMM… THAT’S NOT SOMETHING ONLY WE WOULD KNOW 👀";
+    } else {
+      feedback.innerHTML = "YOU DON’T REMEMBER OUR DATE?? 😭";
+    }
+  }
+}
+
+function typeWriter(){
+  const message = document.getElementById("message");
+  let i = 0;
+  message.innerHTML = "";
+
+  function typing(){
+    if(i < text.length){
+      message.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing,40);
+    }
+  }
+  typing();
+}
+
+function closeSecret(){
+  document.getElementById("secret").style.display = "none";
+}
+
+/* Sparkling Cursor */
+document.addEventListener("mousemove", function(e){
+  const sparkle = document.createElement("div");
+  sparkle.className = "sparkle";
+  sparkle.innerText = "✨";
+  sparkle.style.left = e.pageX + "px";
+  sparkle.style.top = e.pageY + "px";
+  document.body.appendChild(sparkle);
+
+  setTimeout(() => {
+    sparkle.remove();
+  }, 800);
+});
+</script>
+
+</body>
+</html>

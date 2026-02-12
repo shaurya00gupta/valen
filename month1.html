@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>I made u this 💖</title>
+
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #f7c6d0, #fde2e4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* FLOATING FLOWERS */
+.flower {
+  position: absolute;
+  animation: float linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(110vh) rotate(0deg);
+  }
+  to {
+    transform: translateY(-130vh) rotate(360deg);
+  }
+}
+
+/* CONTAINER */
+.container {
+  text-align: center;
+  z-index: 2;
+}
+
+/* TITLE */
+h1 {
+  color: #c9184a;
+  margin-bottom: 20px;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+/* NOTE BOX */
+.note-box {
+  width: 260px;
+  height: 180px;
+  background: #f8a5c2;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* IMAGE INSIDE BOX */
+.note-box img {
+  width: 90%;
+  height: 99%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* HEART ON BOX */
+.note-box::after {
+  content: "💗";
+  position: absolute;
+  font-size: 34px;
+  bottom: 8px;
+  right: 10px;
+}
+
+/* NOTE CARD */
+.note {
+  position: absolute;
+  top: 20px;              /* 👈 INSIDE the box now */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  min-height: 110px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  padding: 16px 16px 20px;
+  font-size: 18px;
+  color: #c9184a;
+  animation: slide 0.5s ease;
+  z-index: 3;
+}
+.note .close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #ff4d6d;
+}
+
+
+
+/* NOTE ANIMATION */
+@keyframes slide {
+  from {
+    transform: translate(-50%, 40px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+/* BUTTONS */
+.buttons {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+button {
+  padding: 12px 26px;
+  border: none;
+  border-radius: 10px;
+  background: #ff6b81;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<!-- MANY FLOATING FLOWERS -->
+<span class="flower" style="left:5%; font-size:20px; animation-duration:10s">🌸</span>
+<span class="flower" style="left:10%; font-size:26px; animation-duration:14s">🌷</span>
+<span class="flower" style="left:15%; font-size:18px; animation-duration:9s">🌸</span>
+<span class="flower" style="left:20%; font-size:30px; animation-duration:16s">🌹</span>
+<span class="flower" style="left:25%; font-size:22px; animation-duration:12s">🌷</span>
+<span class="flower" style="left:35%; font-size:28px; animation-duration:15s">🌸</span>
+<span class="flower" style="left:45%; font-size:24px; animation-duration:11s">🌹</span>
+<span class="flower" style="left:55%; font-size:18px; animation-duration:9s">🌷</span>
+<span class="flower" style="left:65%; font-size:30px; animation-duration:17s">🌸</span>
+<span class="flower" style="left:75%; font-size:22px; animation-duration:13s">🌹</span>
+<span class="flower" style="left:85%; font-size:26px; animation-duration:14s">🌷</span>
+<span class="flower" style="left:95%; font-size:20px; animation-duration:10s">🌸</span>
+
+<div class="container">
+  <h1>see, I made u this 💖</h1>
+
+  <div class="note-box" id="box">
+    <img src="Screenshot 2026-01-31 201702.png" alt="made for you">
+  </div>
+
+  <div class="buttons">
+    <button onclick="nextNote()">OPEN ANOTHER</button>
+    <a href="mwah4.html">
+      <button>BACK</button>
+    </a>
+  </div>
+</div>
+
+<script>
+const notes = [
+  "💗 I love you, My Princess",
+  "🌸 You make me smile and i constantly miss u..",
+  "💌 You’re my favorite ",
+  "🫶 I chose you forever and ever, u r only mine, mine and mine bss",
+  "✨ Always you The most gorgoeus, most beautiful"
+];
+
+let index = 0;
+
+function nextNote() {
+  const box = document.getElementById("box");
+
+  const oldNote = document.querySelector(".note");
+  if (oldNote) oldNote.remove();
+
+  if (index >= notes.length) index = 0;
+
+  const note = document.createElement("div");
+  note.className = "note";
+  note.innerText = notes[index];
+
+  box.appendChild(note);
+  index++;
+}
+</script>
+
+</body>
+</html>
