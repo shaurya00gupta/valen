@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Last Page 💌</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+  text-transform: uppercase;
+}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#ffd6e8,#ffebf5);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;   /* changed */
+  overflow-y:auto;          /* ENABLE SCROLL */
+  overflow-x:hidden;
+  color:white;
+  transition:2s ease;
+}
+
+
+/* Dark flower overlay */
+.flower{
+  position:absolute;
+  top:-50px;
+  font-size:28px;
+  opacity:0.9;
+  animation:fall 6s linear forwards;
+  filter:blur(1px);
+}
+
+@keyframes fall{
+  from{ transform:translateY(-10vh) rotate(0deg);}
+  to{ transform:translateY(110vh) rotate(360deg);}
+}
+
+/* Container */
+.container{
+  text-align:center;
+  max-width:650px;
+  padding:60px 25px;
+  opacity:0;
+  transform:translateY(30px);
+  transition:2s ease;
+}
+
+/* Message */
+.message{
+  font-size:18px;
+  line-height:1.9;
+  white-space:pre-line;
+  min-height:220px;
+}
+
+/* Button */
+button{
+  margin-top:40px;
+  padding:14px 30px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d88;
+  color:white;
+  font-size:14px;
+  cursor:pointer;
+  transition:0.4s;
+  box-shadow:0 0 20px rgba(255,77,136,0.6);
+}
+
+button:hover{
+  transform:scale(1.08);
+}
+
+/* Final Love Screen */
+.final{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle,#ff4d88,#1a1a1a);
+  opacity:0;
+  pointer-events:none;
+  transition:1.5s;
+  flex-direction:column;
+  text-align:center;
+  padding:20px;
+}
+
+.final h1{
+  font-size:40px;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.1);}
+  100%{transform:scale(1);}
+}
+
+/* Floating hearts */
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:float 8s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes float{
+  from{ transform:translateY(100vh);}
+  to{ transform:translateY(-120vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="container">
+  <div class="message" id="message"></div>
+  <button id="chooseBtn" style="display:none;" onclick="finalScreen()">AND I ALWAYS WILL.</button>
+</div>
+
+<div class="final" id="final">
+  <h1>I LOVE U SHREYA<br>MY CUTIE WIFEY 💗</h1>
+</div>
+
+<script>
+
+const text = `BEFORE THIS ENDS…
+
+THIS STARTED AS SOMETHING LIGHT.
+SOMETHING SOFT.
+
+BUT SOMEWHERE ALONG THE WAY,
+IT TURNED INTO SOMETHING REAL.
+
+NOT JUST WORDS.
+NOT JUST MOMENTS.
+
+IT BECAME YOU.
+
+EVERY DETAIL HERE
+WAS DONE WITH INTENTION.
+
+BECAUSE YOU MATTER TO ME.
+
+AND OUT OF EVERYONE,
+IN EVERY SITUATION,
+IN EVERY LIFETIME…
+
+FOREVER AND EVER AND EVER…
+
+I CHOOSE YOU.
+
+TODAY.
+TOMORROW.
+ALWAYS.`;
+
+let i = 0;
+const message = document.getElementById("message");
+
+/* CINEMATIC FLOWERS DARK TRANSITION */
+window.onload = function(){
+
+  // drop dark flowers for 3 seconds
+  const flowerInterval = setInterval(createFlower, 120);
+
+  setTimeout(()=>{
+    clearInterval(flowerInterval);
+
+    // change background to dark
+    document.body.style.background =
+      "linear-gradient(135deg,#1a1a1a,#3a0f1f)";
+  },3000);
+
+  // show content after dark
+  setTimeout(()=>{
+    document.getElementById("container").style.opacity="1";
+    document.getElementById("container").style.transform="translateY(0)";
+    typeWriter();
+  },4500);
+};
+
+function createFlower(){
+  const flower = document.createElement("div");
+  flower.className="flower";
+  flower.innerText="🌹";
+
+  flower.style.left=Math.random()*window.innerWidth+"px";
+  flower.style.animationDuration=(4+Math.random()*3)+"s";
+  flower.style.fontSize=(20+Math.random()*20)+"px";
+
+  document.body.appendChild(flower);
+
+  setTimeout(()=>flower.remove(),6000);
+}
+
+function typeWriter(){
+  if(i < text.length){
+    message.innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter,35);
+  } else {
+    document.getElementById("chooseBtn").style.display="inline-block";
+  }
+}
+
+function finalScreen(){
+  const final = document.getElementById("final");
+  final.style.opacity="1";
+  final.style.pointerEvents="auto";
+
+  setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerText="💖";
+    heart.style.left=Math.random()*window.innerWidth+"px";
+    heart.style.animationDuration=(6+Math.random()*4)+"s";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),8000);
+  },400);
+}
+
+</script>
+
+</body>
+</html>
