@@ -19,9 +19,10 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  overflow:hidden;
+  overflow-x:hidden;  /* ✅ instead of overflow:hidden */
   animation: fadeIn 1.5s ease;
 }
+
 
 /* Fade In */
 @keyframes fadeIn{
@@ -100,7 +101,28 @@ button:hover{
   color:#d63384;
   font-size:15px;
   line-height:1.6;
+
+  max-height:220px;          /* controls visible height */
+  overflow-y:auto;           /* enables vertical scroll */
+  padding-right:8px;
+  scroll-behavior:smooth;
 }
+
+/* Cute scrollbar */
+.secret::-webkit-scrollbar{
+  width:6px;
+}
+
+.secret::-webkit-scrollbar-track{
+  background:#ffeaf4;
+  border-radius:10px;
+}
+
+.secret::-webkit-scrollbar-thumb{
+  background:#ff8fab;
+  border-radius:10px;
+}
+
 
 .typewriter{
   border-right:2px solid #d63384;
@@ -154,9 +176,10 @@ button:hover{
   <button onclick="unlock()">UNLOCK</button>
 
   <!-- Back Button BELOW Unlock -->
-  <a href="index.html">
-    <button style="background:#ff8fab;">← BACK</button>
-  </a>
+  <button onclick="window.location.href='./mwah4.html'" style="background:#ff8fab;">
+  ← BACK
+</button>
+
 
   <div class="feedback" id="feedback"></div>
 
@@ -180,7 +203,7 @@ YOU’VE SLOWLY BECOME SOMEONE REALLY IMPORTANT TO ME. like a part of me shreya 
 u r my forever and i just want to be with u forever and ever and ever bss. I CHOOSE YOU AND ONLY YOU AND I’M REALLY GLAD IT’S YOU.
 
 hn ik LONG DISTANCE IS HARD SOMETIMES we fight a lot srsly a lot but at the end we always end up talking and making up and i just want to say that I APPRECIATE HOW MUCH EFFORT YOU PUT IN TO MAKE THIS WORK. I KNOW IT’S NOT EASY FOR YOU EITHER, AND I’M REALLY GRATEFUL FOR EVERYTHING YOU DO my cutie my guchupuchu my cupcake.
-BUT CHOOSING YOU ISN’T.
+ik i've made alot of mistakes up untill now... BUT CHOOSING YOU ISN’T one of them.
 
 I’M REALLY GLAD IT’S YOU. 💗`;
 
