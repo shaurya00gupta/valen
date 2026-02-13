@@ -62,7 +62,7 @@ body {
   width: 100%;
   background: white;
   border-radius: 12px;
-  padding: 22px 18px 26px;
+  padding: 30px 18px 26px;
   text-align: center;
   box-shadow: 0 20px 40px rgba(0,0,0,0.25);
   opacity: 0;
@@ -76,6 +76,22 @@ body {
   opacity: 1;
   transform: translateX(-50%) scale(1);
   pointer-events: auto;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ff6b81;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
 }
 
 /* ENVELOPE */
@@ -114,6 +130,8 @@ body {
   text-align: center;
   font-weight: 700;
   font-size: 18px;
+  color: #5a3e00;
+  letter-spacing: 1px;
   transition: opacity 0.3s ease;
 }
 
@@ -121,7 +139,7 @@ body {
   opacity: 0;
 }
 
-/* BUTTON */
+/* BUTTON BELOW */
 .buttons {
   margin-top: 25px;
   text-align: center;
@@ -143,7 +161,7 @@ body {
   box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
-/* Mobile adjustments */
+/* MOBILE TWEAK */
 @media (max-width: 480px) {
   .letter-popup {
     font-size: 14px;
@@ -155,6 +173,7 @@ body {
 }
 </style>
 </head>
+
 <body>
 
 <script>
@@ -173,6 +192,8 @@ for (let i = 0; i < 35; i++) {
 <div class="wrapper" id="wrapper">
 
   <div class="letter-popup">
+    <div class="close-btn" id="closeBtn">✖</div>
+
     <strong>
       SHREYA, u r everything that i want everything that i need or everything that i could possibly ask for so here's just a small gift from me that might bring a smile to ur face cuz ik that's the most beautiful thing ever made....<br><br>
       I love you! 💗
@@ -183,7 +204,7 @@ for (let i = 0; i < 35; i++) {
 
   <div class="envelope" id="envelope">
     <div class="flap"></div>
-    <div class="hint">Place your hand here</div>
+    <div class="hint">Click here</div>
   </div>
 
   <div class="buttons">
@@ -193,12 +214,19 @@ for (let i = 0; i < 35; i++) {
 </div>
 
 <script>
-/* CLICK TO OPEN (works on mobile + desktop) */
 const wrapper = document.getElementById("wrapper");
 const envelope = document.getElementById("envelope");
+const closeBtn = document.getElementById("closeBtn");
 
+/* Open letter */
 envelope.addEventListener("click", () => {
-  wrapper.classList.toggle("open");
+  wrapper.classList.add("open");
+});
+
+/* Close letter */
+closeBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  wrapper.classList.remove("open");
 });
 </script>
 
