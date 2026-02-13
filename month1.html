@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I made u this 💖</title>
 
 <style>
@@ -14,13 +15,14 @@
 
 /* BODY */
 body {
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(135deg, #f7c6d0, #fde2e4);
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: Arial, sans-serif;
-  overflow: hidden;
+  position: relative;
+  overflow-x: hidden;
 }
 
 /* FLOATING FLOWERS */
@@ -28,6 +30,7 @@ body {
   position: absolute;
   animation: float linear infinite;
   opacity: 0.7;
+  pointer-events: none;
 }
 
 @keyframes float {
@@ -42,6 +45,8 @@ body {
 /* CONTAINER */
 .container {
   text-align: center;
+  width: 90%;
+  max-width: 380px;
   z-index: 2;
 }
 
@@ -50,12 +55,13 @@ h1 {
   color: #c9184a;
   margin-bottom: 20px;
   text-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  font-size: 22px;
 }
 
 /* NOTE BOX */
 .note-box {
-  width: 260px;
-  height: 180px;
+  width: 100%;
+  aspect-ratio: 4 / 3; /* keeps box proportional */
   background: #f8a5c2;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.25);
@@ -66,8 +72,8 @@ h1 {
 
 /* IMAGE INSIDE BOX */
 .note-box img {
-  width: 90%;
-  height: 99%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 16px;
 }
@@ -76,7 +82,7 @@ h1 {
 .note-box::after {
   content: "💗";
   position: absolute;
-  font-size: 34px;
+  font-size: 28px;
   bottom: 8px;
   right: 10px;
 }
@@ -84,32 +90,20 @@ h1 {
 /* NOTE CARD */
 .note {
   position: absolute;
-  top: 20px;              /* 👈 INSIDE the box now */
+  top: 10%;
   left: 50%;
   transform: translateX(-50%);
-  width: 220px;
-  min-height: 110px;
+  width: 85%;
   background: white;
   border-radius: 14px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-  padding: 16px 16px 20px;
-  font-size: 18px;
+  padding: 14px;
+  font-size: 16px;
   color: #c9184a;
   animation: slide 0.5s ease;
-  z-index: 3;
-}
-.note .close {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  color: #ff4d6d;
+  text-align: center;
 }
 
-
-
-/* NOTE ANIMATION */
 @keyframes slide {
   from {
     transform: translate(-50%, 40px);
@@ -131,7 +125,9 @@ h1 {
 }
 
 button {
-  padding: 12px 26px;
+  width: 100%;
+  max-width: 260px;
+  padding: 12px;
   border: none;
   border-radius: 10px;
   background: #ff6b81;
@@ -139,29 +135,36 @@ button {
   font-size: 16px;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  transition: 0.2s;
 }
 
 button:hover {
   transform: scale(1.05);
+}
+
+/* SMALL SCREEN TWEAK */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 18px;
+  }
+
+  .note {
+    font-size: 14px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- MANY FLOATING FLOWERS -->
+<!-- FLOATING FLOWERS -->
 <span class="flower" style="left:5%; font-size:20px; animation-duration:10s">🌸</span>
-<span class="flower" style="left:10%; font-size:26px; animation-duration:14s">🌷</span>
-<span class="flower" style="left:15%; font-size:18px; animation-duration:9s">🌸</span>
-<span class="flower" style="left:20%; font-size:30px; animation-duration:16s">🌹</span>
-<span class="flower" style="left:25%; font-size:22px; animation-duration:12s">🌷</span>
-<span class="flower" style="left:35%; font-size:28px; animation-duration:15s">🌸</span>
-<span class="flower" style="left:45%; font-size:24px; animation-duration:11s">🌹</span>
-<span class="flower" style="left:55%; font-size:18px; animation-duration:9s">🌷</span>
-<span class="flower" style="left:65%; font-size:30px; animation-duration:17s">🌸</span>
-<span class="flower" style="left:75%; font-size:22px; animation-duration:13s">🌹</span>
-<span class="flower" style="left:85%; font-size:26px; animation-duration:14s">🌷</span>
-<span class="flower" style="left:95%; font-size:20px; animation-duration:10s">🌸</span>
+<span class="flower" style="left:15%; font-size:26px; animation-duration:14s">🌷</span>
+<span class="flower" style="left:25%; font-size:18px; animation-duration:9s">🌸</span>
+<span class="flower" style="left:40%; font-size:30px; animation-duration:16s">🌹</span>
+<span class="flower" style="left:55%; font-size:22px; animation-duration:12s">🌷</span>
+<span class="flower" style="left:70%; font-size:28px; animation-duration:15s">🌸</span>
+<span class="flower" style="left:85%; font-size:24px; animation-duration:11s">🌹</span>
 
 <div class="container">
   <h1>see, I made u this 💖</h1>
@@ -182,9 +185,9 @@ button:hover {
 const notes = [
   "💗 I love you, My Princess",
   "🌸 You make me smile and i constantly miss u..",
-  "💌 You’re my favorite ",
+  "💌 You’re my favorite",
   "🫶 I chose you forever and ever, u r only mine, mine and mine bss",
-  "✨ Always you The most gorgoeus, most beautiful"
+  "✨ Always you The most gorgeous, most beautiful"
 ];
 
 let index = 0;
