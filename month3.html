@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ONLY YOU CAN OPEN THIS 💌</title>
 
 <style>
@@ -14,15 +15,15 @@
 }
 
 body{
-  height:100vh;
+  min-height:100vh;
   background: linear-gradient(135deg,#ffd6e0,#ffeaf4);
   display:flex;
   justify-content:center;
   align-items:center;
-  overflow-x:hidden;  /* ✅ instead of overflow:hidden */
+  padding:20px;
+  overflow-x:hidden;
   animation: fadeIn 1.5s ease;
 }
-
 
 /* Fade In */
 @keyframes fadeIn{
@@ -36,6 +37,7 @@ body{
   font-size:22px;
   opacity:0.4;
   animation: float 12s linear infinite;
+  pointer-events:none;
 }
 
 @keyframes float{
@@ -46,11 +48,12 @@ body{
 /* Card */
 .card{
   background:white;
-  padding:40px;
+  padding:35px 25px;
   border-radius:20px;
   text-align:center;
   box-shadow:0 15px 40px rgba(0,0,0,0.2);
-  width:340px;
+  width:100%;
+  max-width:380px;
   animation: glow 3s infinite alternate;
 }
 
@@ -62,11 +65,13 @@ body{
 h2{
   color:#d63384;
   margin-bottom:15px;
+  font-size:20px;
 }
 
 p{
   margin-bottom:15px;
   color:#444;
+  font-size:14px;
 }
 
 input{
@@ -76,10 +81,11 @@ input{
   border:1px solid #ff9ecf;
   outline:none;
   margin-bottom:12px;
+  font-size:14px;
 }
 
 button{
-  padding:10px 20px;
+  padding:10px;
   border:none;
   border-radius:8px;
   background:#ff6fa1;
@@ -88,6 +94,7 @@ button{
   transition:0.3s;
   margin-top:8px;
   width:100%;
+  font-size:14px;
 }
 
 button:hover{
@@ -99,16 +106,15 @@ button:hover{
   display:none;
   margin-top:20px;
   color:#d63384;
-  font-size:15px;
+  font-size:14px;
   line-height:1.6;
-
-  max-height:220px;          /* controls visible height */
-  overflow-y:auto;           /* enables vertical scroll */
+  max-height:220px;
+  overflow-y:auto;
   padding-right:8px;
   scroll-behavior:smooth;
 }
 
-/* Cute scrollbar */
+/* Scrollbar */
 .secret::-webkit-scrollbar{
   width:6px;
 }
@@ -123,7 +129,6 @@ button:hover{
   border-radius:10px;
 }
 
-
 .typewriter{
   border-right:2px solid #d63384;
   white-space:pre-line;
@@ -134,10 +139,9 @@ button:hover{
   background:#ff8fab;
 }
 
-/* Feedback text */
 .feedback{
   margin-top:8px;
-  font-size:14px;
+  font-size:13px;
   color:#d63384;
   min-height:20px;
 }
@@ -153,6 +157,13 @@ button:hover{
 @keyframes sparkleFade{
   from{opacity:1; transform:scale(1);}
   to{opacity:0; transform:scale(2);}
+}
+
+/* Small screens */
+@media (max-width:480px){
+  h2{ font-size:18px; }
+  p{ font-size:13px; }
+  .secret{ font-size:13px; }
 }
 </style>
 </head>
@@ -175,17 +186,17 @@ button:hover{
   
   <button onclick="unlock()">UNLOCK</button>
 
-  <!-- Back Button BELOW Unlock -->
   <button onclick="window.location.href='./mwah4.html'" style="background:#ff8fab;">
-  ← BACK
-</button>
-
+    ← BACK
+  </button>
 
   <div class="feedback" id="feedback"></div>
 
   <div class="secret" id="secret">
     <div class="typewriter" id="message"></div>
-    <button class="close-btn" onclick="closeSecret()">CLOSE BEFORE MEREKO AUR SHARAM AAYE 😭</button>
+    <button class="close-btn" onclick="closeSecret()">
+      CLOSE BEFORE MEREKO AUR SHARAM AAYE 😭
+    </button>
   </div>
 
 </div>
@@ -196,7 +207,7 @@ let attempts = 0;
 
 const text = `I DIDN’T WANT TO SAY THIS DIRECTLY YET...
 
-Ik it's been almost 4 months only ik it's very less but I CAN’T HELP BUT FEEL THIS WAY cuz like 
+Ik it's been almost 4 months only ik it's very less but it feels close to 4 years and I CAN’T HELP BUT FEEL THIS WAY cuz like 
 it feels like forever to me and I just want to say that I LOVE YOU SO MUCH like soo soo soo  muchhhhhh 💗💗💗
 
 YOU’VE SLOWLY BECOME SOMEONE REALLY IMPORTANT TO ME. like a part of me shreya that i can never forget about nd i don't even wanna forget.
@@ -218,12 +229,9 @@ function unlock(){
     typeWriter();
   } else {
     attempts++;
-
-    if(attempts < 3){
-      feedback.innerHTML = "HMMM… THAT’S NOT SOMETHING ONLY WE WOULD KNOW 👀";
-    } else {
-      feedback.innerHTML = "YOU DON’T REMEMBER OUR DATE?? 😭";
-    }
+    feedback.innerHTML = attempts < 3 
+      ? "HMMM… THAT’S NOT SOMETHING ONLY WE WOULD KNOW 👀"
+      : "YOU DON’T REMEMBER OUR DATE?? 😭";
   }
 }
 
@@ -246,7 +254,6 @@ function closeSecret(){
   document.getElementById("secret").style.display = "none";
 }
 
-/* Sparkling Cursor */
 document.addEventListener("mousemove", function(e){
   const sparkle = document.createElement("div");
   sparkle.className = "sparkle";
